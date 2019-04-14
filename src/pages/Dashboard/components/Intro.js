@@ -11,8 +11,7 @@ const Intro = props => {
     <Jumbotron>
       <h1>Hello there!</h1>
       <p>
-        This is a simple hero unit, a simple jumbotron-style component for
-        calling extra attention to featured content or information.
+        Click on button below to load some maps.
       </p>
       <p>
         <Button

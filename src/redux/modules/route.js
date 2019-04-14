@@ -68,7 +68,7 @@ export const loadRoute = id => async dispatch => {
     const route = await getTmpRoute();
     setTimeout(() => {
       return dispatch({ type: LOAD_ROUTE_SUCCESS, data: route });
-    }, 1000);
+    }, 100);
   } catch (error) {
     return dispatch({ type: LOAD_ROUTE_FAIL, error });
   }
@@ -96,5 +96,13 @@ export const addPoint = latLng => (dispatch, getState) => {
     lng: latLng.lng,
   });
 
+  return dispatch({ type: SET_DATA, data })
+};
+
+export const removePoint = id => (dispatch, getState) => {
+  const state = getState();
+  const data = state.route.data ? state.route.data : {name: "", id: 1, points: []}
+
+  data.points = data.points.filter(point => point.id !== id)
   return dispatch({ type: SET_DATA, data })
 };

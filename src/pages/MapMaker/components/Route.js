@@ -18,11 +18,17 @@ const Route = props => {
   const handleUpdate = (id, latLng) => {
     props.editPoint(id, latLng);
   };
+
+  const handleRemove = (id, latLng) => {
+    props.removePoint(id);
+  };
+
   return (
     <LayerGroup>
       {route.points.map((route, idx) => (
         <DraggableMarker
           onUpdate={handleUpdate}
+          onRemove={handleRemove}
           key={idx}
           id={route.id}
           lat={route.lat}
@@ -39,7 +45,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  editPoint: routeActions.editPoint
+  editPoint: routeActions.editPoint,
+  removePoint: routeActions.removePoint
 };
 
 export default withRouter(

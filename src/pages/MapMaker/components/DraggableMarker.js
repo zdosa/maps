@@ -1,5 +1,7 @@
 import React, { createRef } from "react";
-import { Marker } from "react-leaflet";
+import { Marker, Popup } from "react-leaflet";
+
+import Button from "react-bootstrap/Button";
 
 const DraggableMarker = props => {
   const refmarker = createRef();
@@ -8,7 +10,12 @@ const DraggableMarker = props => {
     const marker = refmarker.current;
     if (marker != null) {
       props.onUpdate(props.id, marker.leafletElement.getLatLng());
+      console.log(marker);
     }
+  };
+
+  const removeMarker = () => {
+    props.onRemove(props.id);
   };
 
   return (
@@ -17,7 +24,11 @@ const DraggableMarker = props => {
       onDrag={updatePosition}
       position={[props.lat, props.lng]}
       ref={refmarker}
-    />
+    >
+      <Popup>
+        <Button onClick={() => removeMarker()}>Remove marker</Button>
+      </Popup>
+    </Marker>
   );
 };
 
