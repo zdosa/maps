@@ -2,22 +2,22 @@ const LOAD_ROUTE = "LOAD_ROUTE";
 const LOAD_ROUTE_SUCCESS = "LOAD_ROUTE_SUCCESS";
 const LOAD_ROUTE_FAIL = "LOAD_ROUTE_FAIL";
 
-const EDIT_POINT = "EDIT_POINT";
+const SET_DATA = "SET_DATA";
 
 const TMP_ROUTE = {
   name: "test",
   id: 1,
   points: [
-    { id: 1, lat: 47.54687159892238, lng: 3.2080078125000004 },
-    { id: 2, lat: 49.49667452747045, lng: 8.173828125000002 },
-    { id: 3, lat: 49.993615462541136, lng: 12.436523437500002 },
-    { id: 4, lat: 49.38237278700955, lng: 17.314453125000004 },
-    { id: 5, lat: 48.16608541901253, lng: 20.522460937500004 },
-    { id: 6, lat: 43.11702412135048, lng: 22.412109375000004 },
-    { id: 7, lat: 43.54854811091288, lng: 16.589355468750004 },
-    { id: 8, lat: 47.73932336136857, lng: 12.7880859375 },
-    { id: 9, lat: 45.22848059584359, lng: 4.855957031250001 },
-    { id: 10, lat: 44.5278427984555, lng: -2.8125 }
+    { id: 0, lat: 47.54687159892238, lng: 3.2080078125000004 },
+    { id: 1, lat: 49.49667452747045, lng: 8.173828125000002 },
+    { id: 2, lat: 49.993615462541136, lng: 12.436523437500002 },
+    { id: 3, lat: 49.38237278700955, lng: 17.314453125000004 },
+    { id: 4, lat: 48.16608541901253, lng: 20.522460937500004 },
+    { id: 5, lat: 43.11702412135048, lng: 22.412109375000004 },
+    { id: 6, lat: 43.54854811091288, lng: 16.589355468750004 },
+    { id: 7, lat: 47.73932336136857, lng: 12.7880859375 },
+    { id: 8, lat: 45.22848059584359, lng: 4.855957031250001 },
+    { id: 9, lat: 44.5278427984555, lng: -2.8125 }
   ]
 };
 
@@ -47,7 +47,7 @@ export default function reducer(state = initialState, action) {
         loading: false,
         error: action.error
       };
-    case EDIT_POINT:
+    case SET_DATA:
       return {
         ...state,
         data: action.data
@@ -74,18 +74,27 @@ export const loadRoute = id => async dispatch => {
   }
 };
 
-export const editPoint = (id, latLng) => async (dispatch, getState) => {
-  try {
-    const state = getState();
-    state.route.data.points = state.route.data.points.map(point => {
-      if (point.id === id) {
-        return { id, lat: latLng.lat, lng: latLng.lng };
-      } else {
-        return point;
-      }
-    });
-    dispatch({ type: EDIT_POINT, data: state.route.data });
-  } catch (error) {
-    console.log(error);
-  }
+export const editPoint = (id, latLng) => (dispatch, getState) => {
+  const state = getState();
+  state.route.data.points = state.route.data.points.map(point => {
+    if (point.id === id) {
+      return { id, lat: latLng.lat, lng: latLng.lng };
+    } else {
+      return point;
+    }
+  });
+  return dispatch({ type: SET_DATA, data: state.route.data });
+};
+
+export const addPoint = latLng => (dispatch, getState) => {
+  const state = getState();
+  const data = state.route.data ? state.route.data : {name: "", id: 1, points: []}
+
+  data.points = data.points.concat({
+    id: data.points.length,
+    lat: latLng.lat,
+    lng: latLng.lng,
+  });
+
+  return dispatch({ type: SET_DATA, data })
 };

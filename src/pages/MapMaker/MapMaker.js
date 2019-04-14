@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import { Map, TileLayer } from "react-leaflet";
+import { connect } from "react-redux";
+
+import * as routeActions from "redux/modules/route";
 
 import { Route, MapMenu } from "pages/MapMaker";
 import { MapContainer } from "./MapMaker.styled";
 
 class MapMaker extends Component {
   handleMapClick = event => {
-    console.log(event);
+    this.props.addPoint(event.latlng)
   };
 
   render() {
@@ -32,4 +35,12 @@ class MapMaker extends Component {
   }
 }
 
-export default MapMaker;
+const mapStateToProps = state => ({
+  route: state.route
+});
+
+const mapDispatchToProps = {
+  addPoint: routeActions.addPoint
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MapMaker);
