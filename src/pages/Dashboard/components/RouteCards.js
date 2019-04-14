@@ -19,7 +19,7 @@ const RouteCard = props => {
     <Container fluid>
       <CardDeck>
         {props.routes.data.map((route, idx) => (
-          <Card key={idx} style={{ minWidth: "200px" }} className="mb-4">
+          <Card key={idx} style={{ minWidth: "300px" }} className="mb-4">
             <Card.Body>
               <Card.Title>{route.name}</Card.Title>
               <ReactJson collapsed src={route.points} />
