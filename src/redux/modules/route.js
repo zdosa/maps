@@ -76,7 +76,7 @@ export const addPoint = latLng => (dispatch, getState) => {
   const data = state.route.data ? state.route.data : {name: "", id: 1, points: []}
 
   data.points = data.points.concat({
-    id: data.points.length,
+    id: Math.random().toString(36).substr(2, 9),
     lat: latLng.lat,
     lng: latLng.lng,
   });
