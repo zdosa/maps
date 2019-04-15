@@ -20,8 +20,7 @@ class MapMaker extends Component {
       if (match.params.id) {
         loadRoute(match.params.id);
       }
-    })
-    
+    });
   }
 
   handleMapClick = event => {
@@ -33,6 +32,7 @@ class MapMaker extends Component {
   };
 
   render() {
+    const { route, routes } = this.props;
     const { editing } = this.state;
     return (
       <MapContainer>
@@ -48,7 +48,7 @@ class MapMaker extends Component {
           dragging={true}
         >
           <TileLayer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png" />
-          <MapMenu editing={editing} toggleEditRoute={this.toggleEditRoute} />
+          <MapMenu editing={editing} toggleEditRoute={this.toggleEditRoute} loading={route.loading || routes.loading} />
           <Route editing={editing} />
         </Map>
       </MapContainer>
@@ -57,7 +57,8 @@ class MapMaker extends Component {
 }
 
 const mapStateToProps = state => ({
-  route: state.route
+  route: state.route,
+  routes: state.routes,
 });
 
 const mapDispatchToProps = {

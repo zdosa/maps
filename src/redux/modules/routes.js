@@ -1,4 +1,5 @@
 import { TMP_ROUTES } from "mock/Routes";
+import { SET_ROUTE_DATA } from "redux/modules/route";
 
 const LOAD_ROUTES = "LOAD_ROUTES";
 const LOAD_ROUTES_SUCCESS = "LOAD_ROUTES_SUCCESS";
@@ -66,6 +67,7 @@ const getTmpRoute = () => {
 
 export const loadRoutes = () => async dispatch => {
   dispatch({ type: LOAD_ROUTES });
+  dispatch({ type: SET_ROUTE_DATA, data: null });
 
   try {
     const routes = await getTmpRoute();

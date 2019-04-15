@@ -2,7 +2,7 @@ const LOAD_ROUTE = "LOAD_ROUTE";
 const LOAD_ROUTE_SUCCESS = "LOAD_ROUTE_SUCCESS";
 const LOAD_ROUTE_FAIL = "LOAD_ROUTE_FAIL";
 
-const SET_DATA = "SET_DATA";
+export const SET_ROUTE_DATA = "SET_ROUTE_DATA";
 
 export const initialState = {
   data: null,
@@ -31,7 +31,7 @@ export default function reducer(state = initialState, action) {
         loading: false,
         error: action.error
       };
-    case SET_DATA:
+    case SET_ROUTE_DATA:
       return {
         ...state,
         data: action.data
@@ -64,7 +64,7 @@ export const editPoint = (id, latLng) => (dispatch, getState) => {
       return point;
     }
   });
-  return dispatch({ type: SET_DATA, data: state.route.data });
+  return dispatch({ type: SET_ROUTE_DATA, data: state.route.data });
 };
 
 export const addPoint = latLng => (dispatch, getState) => {
@@ -81,7 +81,7 @@ export const addPoint = latLng => (dispatch, getState) => {
     lng: latLng.lng
   });
 
-  return dispatch({ type: SET_DATA, data });
+  return dispatch({ type: SET_ROUTE_DATA, data });
 };
 
 export const removePoint = id => (dispatch, getState) => {
@@ -91,5 +91,5 @@ export const removePoint = id => (dispatch, getState) => {
     : { name: "", id: 1, points: [] };
 
   data.points = data.points.filter(point => point.id !== id);
-  return dispatch({ type: SET_DATA, data });
+  return dispatch({ type: SET_ROUTE_DATA, data });
 };
