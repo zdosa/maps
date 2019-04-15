@@ -10,7 +10,6 @@ const DraggableMarker = props => {
     const marker = refmarker.current;
     if (marker != null) {
       props.onUpdate(props.id, marker.leafletElement.getLatLng());
-      console.log(marker);
     }
   };
 
