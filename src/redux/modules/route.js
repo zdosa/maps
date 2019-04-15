@@ -1,5 +1,3 @@
-import { TMP_ROUTE } from "mock/Routes";
-
 const LOAD_ROUTE = "LOAD_ROUTE";
 const LOAD_ROUTE_SUCCESS = "LOAD_ROUTE_SUCCESS";
 const LOAD_ROUTE_FAIL = "LOAD_ROUTE_FAIL";
@@ -17,6 +15,7 @@ export default function reducer(state = initialState, action) {
     case LOAD_ROUTE:
       return {
         ...state,
+        data: null,
         loading: true,
         error: null
       };
@@ -42,15 +41,12 @@ export default function reducer(state = initialState, action) {
   }
 }
 
-const getTmpRoute = () => {
-  return TMP_ROUTE;
-};
-
-export const loadRoute = id => async dispatch => {
+export const loadRoute = id => (dispatch, getState) => {
   dispatch({ type: LOAD_ROUTE });
 
   try {
-    const route = await getTmpRoute();
+    const state = getState();
+    const route = state.routes.data.find(r => r.id + "" === id + "");
     setTimeout(() => {
       return dispatch({ type: LOAD_ROUTE_SUCCESS, data: route });
     }, 100);
@@ -73,21 +69,27 @@ export const editPoint = (id, latLng) => (dispatch, getState) => {
 
 export const addPoint = latLng => (dispatch, getState) => {
   const state = getState();
-  const data = state.route.data ? state.route.data : {name: "", id: 1, points: []}
+  const data = state.route.data
+    ? state.route.data
+    : { name: "", id: 1, points: [] };
 
   data.points = data.points.concat({
-    id: Math.random().toString(36).substr(2, 9),
+    id: Math.random()
+      .toString(36)
+      .substr(2, 9),
     lat: latLng.lat,
-    lng: latLng.lng,
+    lng: latLng.lng
   });
 
-  return dispatch({ type: SET_DATA, data })
+  return dispatch({ type: SET_DATA, data });
 };
 
 export const removePoint = id => (dispatch, getState) => {
   const state = getState();
-  const data = state.route.data ? state.route.data : {name: "", id: 1, points: []}
+  const data = state.route.data
+    ? state.route.data
+    : { name: "", id: 1, points: [] };
 
-  data.points = data.points.filter(point => point.id !== id)
-  return dispatch({ type: SET_DATA, data })
+  data.points = data.points.filter(point => point.id !== id);
+  return dispatch({ type: SET_DATA, data });
 };
