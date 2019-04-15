@@ -2,6 +2,7 @@ export const TMP_ROUTES = [
   {
     name: "Split - Budapest",
     id: 1,
+    center: [45.91294412737392, 16.479492187500004],
     points: [
       {id: "4z1ospg0o", lat: 43.61221676817573, lng: 16.369628906250004},
       {id: "55ajcc197", lat: 44.134913443750726, lng: 15.446777343750002},
@@ -14,6 +15,7 @@ export const TMP_ROUTES = [
   {
     name: "Budapest - Praha",
     id: 2,
+    center: [48.83579746243093, 16.984863281250004],
     points: [
       {id: "817jj3ncs", lat: 47.44294999517949, lng: 19.050292968750004},
       {id: "z2a6saobg", lat: 47.7097615426664, lng: 17.666015625000004},
@@ -25,6 +27,7 @@ export const TMP_ROUTES = [
   {
     name: "Praha - Amsterdam",
     id: 3,
+    center: [52.33533907188941, 9.931640625000002],
     points: [
       {id: "6n6obglj1", lat: 50.085344397538876, lng: 14.414062500000002},
       {id: "1bx23gwkp", lat: 52.52958999943304, lng: 13.337402343750002},
@@ -38,6 +41,7 @@ export const TMP_ROUTES = [
   {
     name: "Lyon - Palermo",
     id: 4,
+    center: [42.98857645832184, 12.194824218750002],
     points: [
       {id: "4wfv2imyr", lat: 45.73685954736049, lng: 4.833984375000001},
       {id: "g9xu9cigr", lat: 45.42929873257377, lng: 8.657226562500002},
@@ -54,6 +58,7 @@ export const TMP_ROUTES = [
   {
     name: "Madrid - Monaco",
     id: 5,
+    center: [42.69858589169842, 2.5268554687500004],
     points: [
       {id: "5fxa5pt4m", lat: 40.40513069752789, lng: -3.7133789062500004},
       {id: "r7gfbbbnt", lat: 41.65649719441145, lng: -0.8239746093750001},

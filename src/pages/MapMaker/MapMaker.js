@@ -34,11 +34,12 @@ class MapMaker extends Component {
   render() {
     const { route, routes } = this.props;
     const { editing } = this.state;
+    const center = (route.data && route.data.center) ? route.data.center : [50, 10];
     return (
       <MapContainer>
         <Map
           onClick={editing ? this.handleMapClick : () => {}}
-          center={[50, 10]}
+          center={center}
           zoom={6}
           maxZoom={19}
           attributionControl={true}
