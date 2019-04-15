@@ -57,7 +57,11 @@ export default function reducer(state = initialState, action) {
 }
 
 const getTmpRoute = () => {
-  return TMP_ROUTES;
+  return new Promise(resolve =>
+    setTimeout(() => {
+      resolve(TMP_ROUTES);
+    }, 1000)
+  );
 };
 
 export const loadRoutes = () => async dispatch => {
@@ -65,9 +69,8 @@ export const loadRoutes = () => async dispatch => {
 
   try {
     const routes = await getTmpRoute();
-    setTimeout(() => {
-      return dispatch({ type: LOAD_ROUTES_SUCCESS, data: routes });
-    }, 1000);
+
+    return dispatch({ type: LOAD_ROUTES_SUCCESS, data: routes });
   } catch (error) {
     return dispatch({ type: LOAD_ROUTES_FAIL, error });
   }

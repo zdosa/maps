@@ -53,10 +53,10 @@ const RouteCard = props => {
               <ButtonGroup>
                 <Button onClick={handleOpenMap(route.id)}>See on map</Button>
                 <Button
-                  variant="danger"
+                  variant="secondary"
                   onClick={handleOpenDeleteModal(route)}
                 >
-                  Delete
+                  Remove
                 </Button>
               </ButtonGroup>
             </Card.Footer>

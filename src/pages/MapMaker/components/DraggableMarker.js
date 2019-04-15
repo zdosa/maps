@@ -19,14 +19,17 @@ const DraggableMarker = props => {
 
   return (
     <Marker
-      draggable
-      onDrag={updatePosition}
+      draggable={props.editing ? true : false}
+      onDrag={props.editing ? updatePosition : () => {}}
       position={[props.lat, props.lng]}
+      opacity={props.opacity}
       ref={refmarker}
     >
-      <Popup>
-        <Button onClick={() => removeMarker()}>Remove marker</Button>
-      </Popup>
+      { props.editing &&
+        <Popup>
+          <Button onClick={() => removeMarker()}>Remove marker</Button>
+        </Popup>
+      }
     </Marker>
   );
 };
